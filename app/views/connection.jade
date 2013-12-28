@@ -1,0 +1,21 @@
+extends template/layout
+
+block content 
+  .container(style='padding-top: 20px')
+    div.col-md-12
+      form.form-horizontal(role='form', method="POST" action="/request/createConnection")
+            .form-group
+              label.col-sm-2.control-label(for='hostname') Host
+              .col-sm-10
+                input#hostname.form-control(type='text', placeholder='Host Name', name="hostname", value="engr-cpanel-mysql.engr.illinois.edu")
+            .form-group
+              label.col-sm-2.control-label(for='username') Username
+              .col-sm-10
+                input#username.form-control(type='text', placeholder='username', name="username", value="archris2_cs411")
+            .form-group
+              label.col-sm-2.control-label(for='password') Password
+              .col-sm-10
+                input#password.form-control(type='Password', placeholder='password', name="password", value="w}up!vS9l%rZ")
+            .form-group
+              .col-sm-offset-2.col-sm-10
+                button.btn.btn-default(type='submit') Use Database

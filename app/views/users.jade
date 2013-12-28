@@ -1,0 +1,43 @@
+extends template/layout
+
+block content 
+  script
+      // Shorthand for $(document).ready();
+        $(function() {
+          $('#databaseList').submit(function(){
+            var table = $('#tableNames').val();
+            var param = table.split(" ");
+            $(this).attr('action', "/connected/" + param[0] + "/" + param[1]);
+          });
+        });
+
+  .container(style='padding-top: 20px')
+    .row
+      div.col-md-12
+        form.form-inline(id="databaseList", role='form', method="POST", action="/connected")
+              .form-group
+                  label.col-sm-2.control-label(for='blahh') Table
+                  .col-sm-10
+                    select.form-control(name="tableNames", id="tableNames")
+                      - each table in tables
+                        option(type='text', placeholder='Blahhh', value="#{table.TABLE_SCHEMA} #{table.TABLE_NAME}") #{table.TABLE_SCHEMA} - #{table.TABLE_NAME}
+              .form-group
+                .col-sm-offset-2.col-sm-10
+                  button.btn.btn-default(type='submit') Use Database
+
+    .row
+      div.col-md-12
+        table.table.table-hover
+          thead 
+            - each key in keys
+              th #{key}
+            th 
+          tbody 
+            - each row, i in rows
+              tr
+                form(method="POST", action="/database/#{databaseName}/#{tableName}/#{row[key[0]}")
+                  - each key in keys
+                    td 
+                      input.form-control(type='text', value='#{row[key]}', name='key')
+                  td 
+                    button.btn.btn-default(type='submit') X
